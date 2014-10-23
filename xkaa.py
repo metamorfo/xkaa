@@ -40,8 +40,8 @@ class Snake():
 		
 		self.text = text
 		# create the window
-		win = gtk.Window(gtk.WINDOW_TOPLEVEL)
-		win.set_decorated(False)
+		win = gtk.Window(gtk.WINDOW_POPUP)
+		#win.set_decorated(False)
 		win.set_title(title)
 		win.set_position(gtk.WIN_POS_MOUSE)
 		win.set_default_size(imgW, imgH)
