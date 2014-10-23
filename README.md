@@ -1,5 +1,4 @@
 xkaa
 ====
 
-a python rework of xcow. The name is inspired to Kaa , the python from 'The Jungle Book' and it also sounds
-similar enough to xcow. 
+a somewhat loose python rework of xcow. The name is inspired to Kaa , the python from 'The Jungle Book'. The x is for X-window.  It also should sound close to xcow.
