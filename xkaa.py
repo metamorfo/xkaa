@@ -1,4 +1,9 @@
 #!/usr/bin/python
+''' As a pun with xcowsay, this python script will display
+a snake with different balloon styles. He will display custom text,
+or pictures (if in dream mode). Here's a sample on how to run it:
+
+Puppet(verb=action,image=imgfile,font=fontfile,text=yourtext '''
 
 import gtk,sys,os
 import cairo
