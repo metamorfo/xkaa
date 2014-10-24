@@ -3,7 +3,13 @@
 a snake with different balloon styles. He will display custom text,
 or pictures (if in dream mode). Here's a sample on how to run it:
 
-Puppet(verb=action,image=imgfile,font=fontfile,text=yourtext '''
+Puppet(verb=action,text=yourtext)
+
+where action can be 'say','think' or 'shout'
+
+or if dreaming :
+
+Puppet(verb="dream",picture=path_to_your_pic) '''
 
 import gtk,sys,os
 import cairo
@@ -13,15 +19,6 @@ from PIL import ImageDraw
 from PIL import Image
 import textwrap
 
-imgW = 640
-imgH = 520
-imgfile = "images/absnake.png"
-sayballoon = "images/say.png"
-dreamballoon = "images/dream.png"
-thinkballoon = "images/dream.png"
-shoutballoon = "images/shout.png"
-fontfile = "fonts/BonvenoCF-Light.otf"
-title = "xKaa"
 
 def combine_sources(action,posx,posy,img1,img2,final):
 	output = final
@@ -36,19 +33,28 @@ def combine_sources(action,posx,posy,img1,img2,final):
 
 class Puppet():
 		
-	def __init__(self,verb=None,image=None,font=None,text=None,dreamed=None):
+	def __init__(self,verb=None,text=None,dreamed=None):
+		
+		self.imgW = 640
+		self.imgH = 520
+		self.imagefile = "images/absnake.png"
+		self.sayballoon = "images/say.png"
+		self.dreamballoon = "images/dream.png"
+		self.thinkballoon = "images/dream.png"
+		self.shoutballoon = "images/shout.png"
+		self.fontfile = "fonts/BonvenoCF-Light.otf"
+		self.title = "xKaa"
+
 		self.verb = verb
-		self.imagefile = image
-		self.fontfile = font	
-		self.text = text
+                self.text = text
 
 		self.popup = self.build_popup()
 		# create the window
 		win = gtk.Window(gtk.WINDOW_TOPLEVEL)
 		win.set_decorated(False)
-		win.set_title(title)
+		win.set_title(self.title)
 		win.set_position(gtk.WIN_POS_MOUSE)
-		win.set_default_size(imgW, imgH)
+		win.set_default_size(self.imgW, self.imgH)
 		
 		# handling events. We want it to close on close
 		win.connect("delete_event", self.close_application)
@@ -72,22 +78,22 @@ class Puppet():
 
 		# some positioning of balloons here
 		if self.verb == "say":
-			self.baloon=sayballoon
+			self.baloon=self.sayballoon
 			self.origx = 200; self.origy = 0
 			self.textX = 260; self.textY = 60
 		elif self.verb == "dream":
-			self.baloon=dreamballoon
+			self.baloon=self.dreamballoon
 			self.origx = 220; self.origy = 0
 		elif self.verb == "think":
-			self.baloon=thinkballoon
+			self.baloon=self.thinkballoon
 			self.origx = 220; self.origy = 0
 			self.textX = 280; self.textY = 60
 		elif self.verb == "shout":
-			self.baloon=shoutballoon
+			self.baloon=self.shoutballoon
 			self.origx = 190; self.origy = 0
 			self.textX = 250; self.textY = 60
 		else:
-			self.baloon=sayballoon
+			self.baloon=self.sayballoon
 			self.origx = 200; self.origy = 0
 			self.textX = 260; self.textY = 60
 		
@@ -125,5 +131,5 @@ if __name__ == '__main__':
 		sys.exit()
 	else:
 		text = sys.argv[1]
-		Puppet(verb="say",image=imgfile,font=fontfile,text=sys.argv[1])
+		Puppet(verb="say",text=sys.argv[1])
 		gtk.main()
