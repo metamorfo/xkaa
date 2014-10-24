@@ -11,28 +11,27 @@ import textwrap
 imgW = 640
 imgH = 520
 imgfile = "images/absnake.png"
-sayballoon = "images/baloon.png"
-global textX
-global textY
-textX = 260
-textY = 60
+sayballoon = "images/say.png"
+dreamballoon = "images/dream.png"
+thinkballoon = "images/dream.png"
+shoutballoon = "images/shout.png"
 fontfile = "fonts/BonvenoCF-Light.otf"
 title = "xKaa"
 
-def combine_sources(img1,img2,final):
+def combine_sources(action,posx,posy,img1,img2,final):
 	output = final
 	s1 = cairo.ImageSurface.create_from_png(img1)
 	s2 = cairo.ImageSurface.create_from_png(img2)
 
 	ctx = cairo.Context(s1)
-	ctx.set_source_surface(s2, 200,0)
+	ctx.set_source_surface(s2, posx,posy)
 	ctx.paint()
 	s1.write_to_png(final)
 	return output
 
 class Puppet():
 		
-	def __init__(self,verb=None,image=None,font=None,text=None):
+	def __init__(self,verb=None,image=None,font=None,text=None,dreamed=None):
 		self.verb = verb
 		self.imagefile = image
 		self.fontfile = font	
@@ -69,14 +68,25 @@ class Puppet():
 		# combine the image
 		if self.verb == "say":
 			self.baloon=sayballoon
+			self.origx = 200; self.origy = 0
+			self.textX = 260; self.textY = 60
 		elif self.verb == "dream":
 			self.baloon=dreamballoon
+			self.origx = 220; self.origy = 0
 		elif self.verb == "think":
 			self.baloon=thinkballoon
+			self.origx = 220; self.origy = 0
+			self.textX = 280; self.textY = 60
+		elif self.verb == "shout":
+			self.baloon=shoutballoon
+			self.origx = 190; self.origy = 0
+			self.textX = 250; self.textY = 60
 		else:
 			self.baloon=sayballoon
+			self.origx = 200; self.origy = 0
+			self.textX = 260; self.textY = 60
 
-                myimage = combine_sources(self.imagefile,self.baloon,self.combo)
+                myimage = combine_sources(self.verb,self.origx,self.origy,self.imagefile,self.baloon,self.combo)
                 # draw text
                 img = Image.open(self.combo)
                 draw = ImageDraw.Draw(img)
@@ -88,7 +98,7 @@ class Puppet():
                 for split in splits:
                         num = splits.index(split)
                         num = num * 15
-                        draw.text((textX, textY+num), split.lstrip(),(0,0,0), font=font)
+                        draw.text((self.textX, self.textY+num), split.lstrip(),(0,0,0), font=font)
                 # save image
                 img.save(self.combo)
 		return self.combo
@@ -105,5 +115,5 @@ if __name__ == '__main__':
 		sys.exit()
 	else:
 		text = sys.argv[1]
-		Puppet(verb="say",image=imgfile,font=fontfile,text= sys.argv[1])
+		Puppet(verb="think",image=imgfile,font=fontfile,text= sys.argv[1])
 		gtk.main()
