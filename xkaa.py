@@ -11,13 +11,12 @@ import textwrap
 imgW = 640
 imgH = 520
 imgfile = "images/absnake.png"
-baloonfile = "images/baloon.png"
-combo = "images/output.png"
+sayballoon = "images/baloon.png"
 global textX
 global textY
 textX = 260
 textY = 60
-myfont = "fonts/BonvenoCF-Light.otf"
+fontfile = "fonts/BonvenoCF-Light.otf"
 title = "xKaa"
 
 def combine_sources(img1,img2,final):
@@ -31,14 +30,15 @@ def combine_sources(img1,img2,final):
 	s1.write_to_png(final)
 	return output
 
-class Snake():
-	def close_application(self,widget,event,data=None):
-		gtk.main_quit()
-		os.unlink(combo)
+class Puppet():
 		
-	def __init__(self,text):
-		
+	def __init__(self,verb=None,image=None,font=None,text=None):
+		self.verb = verb
+		self.imagefile = image
+		self.fontfile = font	
 		self.text = text
+
+		self.popup = self.build_popup()
 		# create the window
 		win = gtk.Window(gtk.WINDOW_POPUP)
 		#win.set_decorated(False)
@@ -53,34 +53,50 @@ class Snake():
 		win.connect("button_press_event",self.close_application)
 		win.show()
 
-		# combine the image
-                myimage = combine_sources(imgfile,baloonfile,combo)
-		# draw text
-		img = Image.open(combo)
-		draw = ImageDraw.Draw(img)
-		font = ImageFont.truetype(myfont, 15)
-		mytext = self.text
-		# handling the wrap around of text is not easy
-		mylimit = 20
-		splits=[mytext[x:x+mylimit] for x in range(0,len(mytext),mylimit)]
-		for split in splits:
-			num = splits.index(split)
-			num = num * 15
-			draw.text((textX, textY+num), split.lstrip(),(0,0,0), font=font)
-		# save image
-		img.save(combo)
-		
 		# load the png into an image object and create the mask
-		pixmap, mask = gtk.gdk.pixmap_create_from_xpm(win.window, None, myimage)
+		pixmap, mask = gtk.gdk.pixmap_create_from_xpm(win.window, None, self.popup)
 		image = gtk.Image()
 		image.set_from_pixmap(pixmap, mask)
 		
-	
 		# add the image to the window	
 		win.add(image)
 		win.shape_combine_mask(mask, 0, 0)
 		# and show
 		win.show_all()
+	
+	def build_popup(self):
+		self.combo = "images/output.png"
+		# combine the image
+		if self.verb == "say":
+			self.baloon=sayballoon
+		elif self.verb == "dream":
+			self.baloon=dreamballoon
+		elif self.verb == "think":
+			self.baloon=thinkballoon
+		else:
+			self.baloon=sayballoon
+
+                myimage = combine_sources(self.imagefile,self.baloon,self.combo)
+                # draw text
+                img = Image.open(self.combo)
+                draw = ImageDraw.Draw(img)
+                font = ImageFont.truetype(self.fontfile, 15)
+                mytext = self.text
+                # handling the wrap around of text is not easy
+                mylimit = 20
+                splits=[mytext[x:x+mylimit] for x in range(0,len(mytext),mylimit)]
+                for split in splits:
+                        num = splits.index(split)
+                        num = num * 15
+                        draw.text((textX, textY+num), split.lstrip(),(0,0,0), font=font)
+                # save image
+                img.save(self.combo)
+		return self.combo
+
+	def close_application(self,widget,event,data=None):
+		gtk.main_quit()
+		os.unlink(self.combo)
+
 
 # main
 if __name__ == '__main__':
@@ -89,5 +105,5 @@ if __name__ == '__main__':
 		sys.exit()
 	else:
 		text = sys.argv[1]
-		Snake(text)
+		Puppet(verb="say",image=imgfile,font=fontfile,text= sys.argv[1])
 		gtk.main()
