@@ -17,7 +17,7 @@ global textX
 global textY
 textX = 260
 textY = 60
-myfont = "BonvenoCF-Light.otf"
+myfont = "fonts/BonvenoCF-Light.otf"
 title = "xKaa"
 
 def combine_sources(img1,img2,final):
