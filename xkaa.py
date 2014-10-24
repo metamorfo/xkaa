@@ -17,7 +17,7 @@ global textX
 global textY
 textX = 260
 textY = 60
-
+myfont = "BonvenoCF-Light.otf"
 title = "xKaa"
 
 def combine_sources(img1,img2,final):
@@ -58,7 +58,7 @@ class Snake():
 		# draw text
 		img = Image.open(combo)
 		draw = ImageDraw.Draw(img)
-		font = ImageFont.truetype("LiberationMono-Bold.ttf", 15)
+		font = ImageFont.truetype(myfont, 15)
 		mytext = self.text
 		# handling the wrap around of text is not easy
 		mylimit = 20
