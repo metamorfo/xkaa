@@ -79,19 +79,20 @@ class Puppet():
 		# some positioning of balloons here
 		if self.verb == "say":
 			self.baloon=self.sayballoon
-			self.origx = 200; self.origy = 0
-			self.textX = 260; self.textY = 60
+			self.origx = 190; self.origy = 10
+			self.textX = 260; self.textY = 55
 		elif self.verb == "dream":
 			self.baloon=self.dreamballoon
 			self.origx = 220; self.origy = 0
+			self.textX = 282; self.textY = 60
 		elif self.verb == "think":
 			self.baloon=self.thinkballoon
 			self.origx = 220; self.origy = 0
-			self.textX = 280; self.textY = 60
+			self.textX = 280; self.textY = 55
 		elif self.verb == "shout":
 			self.baloon=self.shoutballoon
-			self.origx = 190; self.origy = 0
-			self.textX = 250; self.textY = 60
+			self.origx = 170; self.origy = 0
+			self.textX = 240; self.textY = 48
 		else:
 			self.baloon=self.sayballoon
 			self.origx = 200; self.origy = 0

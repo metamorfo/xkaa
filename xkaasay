@@ -13,12 +13,13 @@ parser = OptionParser()
 import optparse
 
 parser = optparse.OptionParser()
-parser.add_option('-t', action="store", default="Hello World!", help="Your text")
+parser.add_option('-t', action="store", default="Hello World! Use -h for help", help="Your text")
 parser.add_option('-a', action="store", default="say", help="action can be: say, shout, think or dream")
+parser.add_option('-d', action="store", default="images/sheep.png", help="path to dream image")
 
 options, args = parser.parse_args()
 
-
+print options
 
 
 xkaa.Puppet(verb=options.a,text=options.t)
