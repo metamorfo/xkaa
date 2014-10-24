@@ -139,5 +139,9 @@ class Puppet():
 	def close_application(self,widget,event,data=None):
 		gtk.main_quit()
 		os.unlink(self.combo)
+		try:
+			os.unlink(self.minidream)
+		except:
+			pass
 
 
