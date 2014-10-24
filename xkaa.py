@@ -123,13 +123,3 @@ class Puppet():
 		gtk.main_quit()
 		os.unlink(self.combo)
 
-
-# main
-if __name__ == '__main__':
-	if len(sys.argv) != 2:
-		print "Usage: " + sys.argv[0] + "Your text here"
-		sys.exit()
-	else:
-		text = sys.argv[1]
-		Puppet(verb="say",text=sys.argv[1])
-		gtk.main()

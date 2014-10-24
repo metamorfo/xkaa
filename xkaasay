@@ -1,0 +1,18 @@
+#!/usr/bin/python
+''' main program. This will handle just the parsing of options
+and then it will generate a Puppet object	'''
+
+
+import os,sys,gtk
+import xkaa 
+
+# main
+if __name__ == '__main__':
+        if len(sys.argv) != 2:
+                print "Usage: " + sys.argv[0] + "Your text here"
+                sys.exit()
+        else:
+                text = sys.argv[1]
+                xkaa.Puppet(verb="say",text=sys.argv[1])
+                gtk.main()
+
