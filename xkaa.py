@@ -39,8 +39,8 @@ class Puppet():
 
 		self.popup = self.build_popup()
 		# create the window
-		win = gtk.Window(gtk.WINDOW_POPUP)
-		#win.set_decorated(False)
+		win = gtk.Window(gtk.WINDOW_TOPLEVEL)
+		win.set_decorated(False)
 		win.set_title(title)
 		win.set_position(gtk.WIN_POS_MOUSE)
 		win.set_default_size(imgW, imgH)
@@ -64,8 +64,8 @@ class Puppet():
 		win.show_all()
 	
 	def build_popup(self):
-		self.combo = "images/output.png"
-		# combine the image
+
+		# some positioning of balloons here
 		if self.verb == "say":
 			self.baloon=sayballoon
 			self.origx = 200; self.origy = 0
@@ -85,20 +85,25 @@ class Puppet():
 			self.baloon=sayballoon
 			self.origx = 200; self.origy = 0
 			self.textX = 260; self.textY = 60
-
+		
+		# combine images together
+		self.combo = "images/output.png"
                 myimage = combine_sources(self.verb,self.origx,self.origy,self.imagefile,self.baloon,self.combo)
+	
                 # draw text
                 img = Image.open(self.combo)
                 draw = ImageDraw.Draw(img)
                 font = ImageFont.truetype(self.fontfile, 15)
                 mytext = self.text
-                # handling the wrap around of text is not easy
+
+                # handling the wrap around of text is not easy, will have to improve this
                 mylimit = 20
                 splits=[mytext[x:x+mylimit] for x in range(0,len(mytext),mylimit)]
                 for split in splits:
                         num = splits.index(split)
                         num = num * 15
                         draw.text((self.textX, self.textY+num), split.lstrip(),(0,0,0), font=font)
+
                 # save image
                 img.save(self.combo)
 		return self.combo
@@ -115,5 +120,5 @@ if __name__ == '__main__':
 		sys.exit()
 	else:
 		text = sys.argv[1]
-		Puppet(verb="think",image=imgfile,font=fontfile,text= sys.argv[1])
+		Puppet(verb="say",image=imgfile,font=fontfile,text=sys.argv[1])
 		gtk.main()
