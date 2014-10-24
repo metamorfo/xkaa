@@ -20,7 +20,7 @@ from PIL import Image
 import textwrap
 
 
-def combine_sources(action,posx,posy,img1,img2,final):
+def combine_sources(posx,posy,img1,img2,final):
 	output = final
 	s1 = cairo.ImageSurface.create_from_png(img1)
 	s2 = cairo.ImageSurface.create_from_png(img2)
@@ -42,8 +42,11 @@ class Puppet():
 		self.dreamballoon = "images/dream.png"
 		self.thinkballoon = "images/dream.png"
 		self.shoutballoon = "images/shout.png"
+		self.dreambase = "images/dreambase.png"
+		self.minidream = "images/minidream.png"
 		self.fontfile = "fonts/BonvenoCF-Light.otf"
 		self.title = "xKaa"
+		self.dreamed = dreamed
 
 		self.verb = verb
                 self.text = text
@@ -73,6 +76,18 @@ class Puppet():
 		win.shape_combine_mask(mask, 0, 0)
 		# and show
 		win.show_all()
+
+	def make_dream(self):
+		# combine images together
+		posx = 100
+		posy = 30
+		im = gtk.Image()
+		pixbuf = gtk.gdk.pixbuf_new_from_file(self.dreamed)
+		scaled_buf = pixbuf.scale_simple(128,128,gtk.gdk.INTERP_BILINEAR)
+		scaled_buf.save(self.minidream,'png')
+		myimage = combine_sources(posx,posy,self.dreambase,self.minidream,self.dreamballoon)
+		return self.dreamballoon
+		
 	
 	def build_popup(self):
 
@@ -82,9 +97,8 @@ class Puppet():
 			self.origx = 190; self.origy = 10
 			self.textX = 260; self.textY = 55
 		elif self.verb == "dream":
-			self.baloon=self.dreamballoon
+			self.baloon=self.make_dream()
 			self.origx = 220; self.origy = 0
-			self.textX = 282; self.textY = 60
 		elif self.verb == "think":
 			self.baloon=self.thinkballoon
 			self.origx = 220; self.origy = 0
@@ -100,7 +114,7 @@ class Puppet():
 		
 		# combine images together
 		self.combo = "images/output.png"
-                myimage = combine_sources(self.verb,self.origx,self.origy,self.imagefile,self.baloon,self.combo)
+                myimage = combine_sources(self.origx,self.origy,self.imagefile,self.baloon,self.combo)
 	
                 # draw text
                 img = Image.open(self.combo)
@@ -108,13 +122,15 @@ class Puppet():
                 font = ImageFont.truetype(self.fontfile, 15)
                 mytext = self.text
 
-                # handling the wrap around of text is not easy, will have to improve this
-                mylimit = 20
-                splits=[mytext[x:x+mylimit] for x in range(0,len(mytext),mylimit)]
-                for split in splits:
-                        num = splits.index(split)
-                        num = num * 15
-                        draw.text((self.textX, self.textY+num), split.lstrip(),(0,0,0), font=font)
+
+		if self.baloon != self.dreamballoon:
+                	# handling the wrap around of text is not easy, will have to improve this
+                	mylimit = 20
+                	splits=[mytext[x:x+mylimit] for x in range(0,len(mytext),mylimit)]
+                	for split in splits:
+                        	num = splits.index(split)
+                        	num = num * 15
+                        	draw.text((self.textX, self.textY+num), split.lstrip(),(0,0,0), font=font)
 
                 # save image
                 img.save(self.combo)
@@ -123,4 +139,5 @@ class Puppet():
 	def close_application(self,widget,event,data=None):
 		gtk.main_quit()
 		os.unlink(self.combo)
+
 
