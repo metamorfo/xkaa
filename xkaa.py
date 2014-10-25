@@ -88,7 +88,6 @@ class Puppet():
 		scaled_buf.save(self.minidream,'png')
 		myimage = combine_sources(posx,posy,self.dreambase,self.minidream,self.dreamballoon)
 		return self.dreamballoon
-		
 	
 	def build_popup(self):
 
