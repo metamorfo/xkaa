@@ -44,6 +44,8 @@ class Puppet():
 		self.shoutballoon = "images/shout.png"
 		self.dreambase = "images/dreambase.png"
 		self.minidream = "images/minidream.png"
+		self.empty = "images/empty.png"
+		self.balloonbase = "images/balloonbase.png"
 		self.fontfile = "fonts/BonvenoCF-Light.otf"
 		self.title = "xKaa"
 		self.dreamed = dreamed
@@ -88,6 +90,27 @@ class Puppet():
 		scaled_buf.save(self.minidream,'png')
 		myimage = combine_sources(posx,posy,self.dreambase,self.minidream,self.dreamballoon)
 		return self.dreamballoon
+
+	def draw_balloons(self,balloontype=None):
+		self.balloontype=balloontype
+		''' this will create a balloon instead of using a premade one '''
+		base = Image.open(self.empty).convert('RGBA')
+		overlay = Image.new('RGBA', base.size, (255,255,255,0))
+		draw = ImageDraw.Draw(overlay)
+		if self.balloontype=='say':
+			draw.ellipse((20, 20, 280, 220), fill = 'white')
+			draw.polygon([(10, 280),(40, 220),(20,20)],fill = 'white')
+		elif ( self.balloontype=='dream')  or ( self.balloontype=='think'):
+			print "gotcha"
+			draw.ellipse((20, 20, 280, 220), fill = 'white', outline = 'black')
+			draw.ellipse((20, 180,100,240), fill = 'white', outline = 'black' )
+			draw.ellipse((0, 220,20,240), fill = 'white', outline = 'black' )
+		elif self.balloontype=='shout':
+			draw.ellipse((20, 20, 280, 220), fill = 'white')
+		else:
+			draw.ellipse((20, 20, 280, 220), fill = 'white')
+		out = Image.alpha_composite(base, overlay)
+		out.save(self.balloonbase)
 	
 	def build_popup(self):
 
@@ -114,6 +137,8 @@ class Puppet():
 		
 		# combine images together
 		self.combo = "images/output.png"
+		self.draw_balloons(balloontype=self.verb)
+		print self.verb
                 myimage = combine_sources(self.origx,self.origy,self.imagefile,self.baloon,self.combo)
 	
                 # draw text
