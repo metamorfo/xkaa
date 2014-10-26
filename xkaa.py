@@ -24,7 +24,13 @@
 
 	if dream, you can pass an image as the dream topic :
 
-	Puppet(character='donkey',verb="dream",dreamed=path_to_your_pic) '''
+	Puppet(character='donkey',verb="dream",dreamed=path_to_your_pic) 
+	
+	You can drag the puppet around the screen by keeping the META/Windows KEY pressed
+	and dragging the image with your mouse.
+	
+	Clicking on the image will close it. It will also close if you press any KEY, other
+	than META/Windows'''
 		
 
 __version__ = "0.1"
@@ -158,10 +164,10 @@ class Puppet():
 
 		if self.verb == 'say':
 			self.origx = 230; self.origy = 50
-			self.textX = 310; self.textY = 95
+			self.textX = 320; self.textY = 95
 		elif self.verb == 'think':
-			self.origx = 220; self.origy = 10
-			self.textX = 300; self.textY = 55
+			self.origx = 230; self.origy = 10
+			self.textX = 320; self.textY = 55
 		elif self.verb == 'dream':
 			self.baloon=self.make_dream()
 			self.origx = 220; self.origy = 0
