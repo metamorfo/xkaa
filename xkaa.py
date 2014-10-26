@@ -136,9 +136,20 @@ class Puppet():
 			draw.ellipse((20, 20, 280, 220), fill = 'white',outline='black')
 			draw.polygon([(20, 230),(94,195),(54,172)],fill = 'white')
 		elif ( self.balloontype=='dream')  or ( self.balloontype=='think'):
-			draw.ellipse((20, 20, 280, 220), fill = 'white', outline = 'black')
-			draw.ellipse((20, 180,100,240), fill = 'white', outline = 'black' )
-			draw.ellipse((0, 220,20,240), fill = 'white', outline = 'black' )
+			# small bubble
+                        draw.ellipse((4, 198,40,236), fill = 'black' )
+                        draw.ellipse((10, 204,34,230), fill = 'white' )
+			# medium bubble
+			draw.ellipse((18, 164, 116, 236), fill = 'black')
+			draw.ellipse((24, 170,110,230), fill = 'white' )
+			# big bubble
+                        draw.ellipse((24, 4, 294, 210), fill = 'black')
+                        draw.ellipse((30, 10, 288, 204), fill = 'white')
+			
+			# fill the blanks
+			draw.ellipse((24, 170,110,230), fill = 'white' )
+			draw.ellipse((10, 204,34,230), fill = 'white' )
+
 		elif self.balloontype=='shout':
 			draw.polygon([(3, 237),(29,183),(46,206),(56,156),
 					(12,170),(36,131),(3,111),(38,96),
