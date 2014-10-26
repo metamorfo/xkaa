@@ -1,17 +1,32 @@
 #!/usr/bin/python
-''' As a pun with xcowsay, this python script will display
-a snake with different balloon styles. He will display custom text,
-or pictures (if in dream mode). Here's a sample on how to run it:
+'''	There was an Old Man in a boat,
+	Who said, 'I'm afloat! I'm afloat!'
+		When they said 'No you ain't!'
+		He was ready to faint,
+	That unhappy Old Man in a boat.
+				(E. Lear)
 
-characters are the pics in images
 
-Puppet(character='snake',verb=say,text="your Text",font="BonvenoCF-Light.otf",fontcolor=(255,0,0))
+	A python rework of xcowsay, this python script will display
+	a character with different balloon styles. He will display custom text,
+	or pictures (if in dream mode). Here's a sample on how to run it:
 
-where action can be 'say','think' or 'shout'
+	characters are the pics in the images directory (bat,donkey,snake,chicken etc.)
 
-or if dreaming :
+	instances are created like this :
 
-Puppet(character='donkey',verb="dream",picture=path_to_your_pic) '''
+	Puppet(character='snake',verb="say",text="your Text",font="BonvenoCF-Light.otf",fontcolor=(255,0,0))
+
+	verb can be : say, think, shout or dream
+
+	if dream, you can pass an image as the dream :
+
+	Puppet(character='donkey',verb="dream",dreamed=path_to_your_pic) '''
+
+
+__version__ = "0.1"
+__author__ = "Salvatore Bognanni <s.bognanni@digitaldecay.org>"
+
 
 import gtk,sys,os
 import cairo
