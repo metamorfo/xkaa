@@ -132,10 +132,10 @@ class Puppet():
 		overlay = Image.new('RGBA', base.size, (255,255,255,0))
 		draw = ImageDraw.Draw(overlay)
 		if self.balloontype=='say':
-			draw.polygon([(20, 230),(100,201),(48,168)],fill = 'black')
+			draw.polygon([(20, 230),(94,196),(56,168)],fill = 'black',outline='black')
 			draw.ellipse((24, 4, 294, 210), fill = 'black')
 			draw.ellipse((30, 10, 288, 204), fill = 'white')
-			draw.polygon([(20, 230),(104,190),(54,170)],fill = 'white')
+			draw.polygon([(30, 220),(94,190),(66,166)],fill = 'white')
 		elif ( self.balloontype=='dream')  or ( self.balloontype=='think'):
 			# small bubble
                         draw.ellipse((4, 198,44,236), fill = 'black' )
