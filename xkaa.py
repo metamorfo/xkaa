@@ -88,7 +88,7 @@ class Puppet():
 		pixbuf = gtk.gdk.pixbuf_new_from_file(self.dreamed)
 		scaled_buf = pixbuf.scale_simple(width,(width*3)/4,gtk.gdk.INTERP_BILINEAR)
 		scaled_buf.save(self.minidream,'png')
-		myimage = combine_sources(posx,posy,self.dreambase,self.minidream,self.dreamballoon)
+		myimage = combine_sources(posx,posy,self.balloonbase,self.minidream,self.dreamballoon)
 		return self.dreamballoon
 
 	def draw_balloons(self,balloontype=None):
@@ -98,43 +98,49 @@ class Puppet():
 		overlay = Image.new('RGBA', base.size, (255,255,255,0))
 		draw = ImageDraw.Draw(overlay)
 		if self.balloontype=='say':
-			draw.ellipse((20, 20, 280, 220), fill = 'white')
-			draw.polygon([(10, 280),(40, 220),(20,20)],fill = 'white')
+			draw.polygon([(20, 230),(94,195),(54,172)],fill = 'white',outline='black')
+			draw.ellipse((20, 20, 280, 220), fill = 'white',outline='black')
+			draw.polygon([(20, 230),(94,195),(54,172)],fill = 'white')
 		elif ( self.balloontype=='dream')  or ( self.balloontype=='think'):
 			print "gotcha"
 			draw.ellipse((20, 20, 280, 220), fill = 'white', outline = 'black')
 			draw.ellipse((20, 180,100,240), fill = 'white', outline = 'black' )
 			draw.ellipse((0, 220,20,240), fill = 'white', outline = 'black' )
 		elif self.balloontype=='shout':
-			draw.ellipse((20, 20, 280, 220), fill = 'white')
+			draw.polygon([(3, 237),(29,183),(46,206),(56,156),
+					(12,170),(36,131),(3,111),(38,96),
+					(8,70),(51,62),(25,22),(85,38),(120,9),
+					(147,42),(191,19),(201,57),(252,47),(249,88),
+					(282,120),(235,137),(260,172),(210,178),
+					(233,218),(170,174),(148,211),(130,162),
+					(104,194),(94,148),(47,229),(29,200)],fill = 'white',outline='black')
 		else:
 			draw.ellipse((20, 20, 280, 220), fill = 'white')
 		out = Image.alpha_composite(base, overlay)
 		out.save(self.balloonbase)
+		return self.balloonbase
 	
 	def build_popup(self):
 
 		# some positioning of balloons here
-		if self.verb == "say":
-			self.baloon=self.sayballoon
-			self.origx = 190; self.origy = 10
-			self.textX = 260; self.textY = 55
-		elif self.verb == "dream":
+		self.baloon=self.draw_balloons(balloontype=self.verb)
+
+		if self.verb == 'say':
+			self.origx = 200; self.origy = 50
+			self.textX = 270; self.textY = 95
+		elif self.verb == 'think':
+			self.origx = 220; self.origy = 10
+			self.textX = 290; self.textY = 55
+		elif self.verb == 'dream':
 			self.baloon=self.make_dream()
 			self.origx = 220; self.origy = 0
-		elif self.verb == "think":
-			self.baloon=self.thinkballoon
-			self.origx = 220; self.origy = 0
-			self.textX = 280; self.textY = 55
-		elif self.verb == "shout":
-			self.baloon=self.shoutballoon
-			self.origx = 170; self.origy = 0
-			self.textX = 240; self.textY = 48
+		elif self.verb == 'shout':
+			self.origx = 210; self.origy = 10
+			self.textX = 270; self.textY = 65
 		else:
-			self.baloon=self.sayballoon
-			self.origx = 200; self.origy = 0
-			self.textX = 260; self.textY = 60
-		
+			self.origx = 190; self.origy = 10
+			self.textX = 260; self.textY = 55
+
 		# combine images together
 		self.combo = "images/output.png"
 		self.draw_balloons(balloontype=self.verb)
