@@ -25,7 +25,7 @@
 
 
 __version__ = "0.1"
-__author__ = "Salvatore Bognanni <s.bognanni@digitaldecay.org>"
+__author__ = "Salvatore Bognanni <salvo AT unixyouth DOT COM>"
 
 
 import gtk,sys,os
