@@ -49,6 +49,7 @@ class Puppet():
 		self.fontfile = "fonts/BonvenoCF-Light.otf"
 		self.title = "xKaa"
 		self.dreamed = dreamed
+		self.fontcolor = (0,0,0)
 
 		self.verb = verb
                 self.text = text
@@ -102,7 +103,6 @@ class Puppet():
 			draw.ellipse((20, 20, 280, 220), fill = 'white',outline='black')
 			draw.polygon([(20, 230),(94,195),(54,172)],fill = 'white')
 		elif ( self.balloontype=='dream')  or ( self.balloontype=='think'):
-			print "gotcha"
 			draw.ellipse((20, 20, 280, 220), fill = 'white', outline = 'black')
 			draw.ellipse((20, 180,100,240), fill = 'white', outline = 'black' )
 			draw.ellipse((0, 220,20,240), fill = 'white', outline = 'black' )
@@ -144,24 +144,22 @@ class Puppet():
 		# combine images together
 		self.combo = "images/output.png"
 		self.draw_balloons(balloontype=self.verb)
-		print self.verb
                 myimage = combine_sources(self.origx,self.origy,self.imagefile,self.baloon,self.combo)
 	
                 # draw text
                 img = Image.open(self.combo)
                 draw = ImageDraw.Draw(img)
                 font = ImageFont.truetype(self.fontfile, 15)
-                mytext = self.text
-
 
 		if self.baloon != self.dreamballoon:
-                	# handling the wrap around of text is not easy, will have to improve this
-                	mylimit = 20
-                	splits=[mytext[x:x+mylimit] for x in range(0,len(mytext),mylimit)]
-                	for split in splits:
-                        	num = splits.index(split)
-                        	num = num * 15
-                        	draw.text((self.textX, self.textY+num), split.lstrip(),(0,0,0), font=font)
+                	# handling the wrap around of text is done via textwrap module
+			lines = textwrap.wrap(self.text, width = 20)
+			y_text = self.textY
+			x_text = self.textX
+			for line in lines:
+				width, height = font.getsize(line)
+				draw.text((x_text, y_text), line, self.fontcolor, font=font)
+				y_text += height
 
                 # save image
                 img.save(self.combo)
