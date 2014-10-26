@@ -132,13 +132,14 @@ class Puppet():
 		overlay = Image.new('RGBA', base.size, (255,255,255,0))
 		draw = ImageDraw.Draw(overlay)
 		if self.balloontype=='say':
-			draw.polygon([(20, 230),(94,195),(54,172)],fill = 'white',outline='black')
-			draw.ellipse((20, 20, 280, 220), fill = 'white',outline='black')
-			draw.polygon([(20, 230),(94,195),(54,172)],fill = 'white')
+			draw.polygon([(20, 230),(100,201),(48,168)],fill = 'black')
+			draw.ellipse((24, 4, 294, 210), fill = 'black')
+			draw.ellipse((30, 10, 288, 204), fill = 'white')
+			draw.polygon([(20, 230),(104,190),(54,170)],fill = 'white')
 		elif ( self.balloontype=='dream')  or ( self.balloontype=='think'):
 			# small bubble
-                        draw.ellipse((4, 198,40,236), fill = 'black' )
-                        draw.ellipse((10, 204,34,230), fill = 'white' )
+                        draw.ellipse((4, 198,44,236), fill = 'black' )
+                        draw.ellipse((10, 204,38,230), fill = 'white' )
 			# medium bubble
 			draw.ellipse((18, 164, 116, 236), fill = 'black')
 			draw.ellipse((24, 170,110,230), fill = 'white' )
@@ -148,9 +149,10 @@ class Puppet():
 			
 			# fill the blanks
 			draw.ellipse((24, 170,110,230), fill = 'white' )
-			draw.ellipse((10, 204,34,230), fill = 'white' )
+			draw.ellipse((10, 204,38,230), fill = 'white' )
 
 		elif self.balloontype=='shout':
+			# this is gonna spill blood
 			draw.polygon([(3, 237),(29,183),(46,206),(56,156),
 					(12,170),(36,131),(3,111),(38,96),
 					(8,70),(51,62),(25,22),(85,38),(120,9),
