@@ -13,6 +13,9 @@
 
 	characters are the pics in the images directory (bat,donkey,snake,chicken etc.)
 
+	character icons are taken from the freeware Animal Icons collection by Martin Berube
+	http://www.softicons.com/animal-icons/animal-icons-by-martin-berube
+
 	instances are created like this :
 
 	Puppet(character='snake',verb="say",text="your Text",font="BonvenoCF-Light.otf",fontcolor=(255,0,0))
@@ -22,7 +25,7 @@
 	if dream, you can pass an image as the dream topic :
 
 	Puppet(character='donkey',verb="dream",dreamed=path_to_your_pic) '''
-
+		
 
 __version__ = "0.1"
 __author__ = "Salvatore Bognanni <salvo AT unixyouth DOT COM>"
