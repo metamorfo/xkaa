@@ -115,8 +115,8 @@ class Puppet():
 	def make_dream(self):
 		# combine images together
 		scalefactor = 1
-		posx = 80 
-		posy = 65 
+		posx = 90
+		posy = 50 
 		width = 128
 		im = gtk.Image()
 		pixbuf = gtk.gdk.pixbuf_new_from_file(self.dreamed)
@@ -164,10 +164,11 @@ class Puppet():
 					(147,42),(191,19),(201,57),(252,47),(249,88),
 					(282,120),(235,137),(260,172),(210,178),
 					(233,218),(170,174),(148,211),(130,185),
-					(104,240),(94,200),(47,229),(29,200)],fill = 'black')
+					(104,240),(94,200),(47,229),(29,200)],fill = 'red')
 
 		else:
-			draw.ellipse((20, 20, 280, 220), fill = 'white')
+			print "No such action"
+			sys.exit()
 		out = Image.alpha_composite(base, overlay)
 		out.save(self.balloonbase)
 		return self.balloonbase
