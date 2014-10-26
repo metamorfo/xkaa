@@ -43,9 +43,11 @@ class Puppet():
 		self.character = character
 		self.font = font
 		self.imgdir = imgdir
-		self.imagefile = os.path.join(self.imgdir,self.character+".png")
+		self.imagefile = os.path.join(self.imgdir,'ab'+self.character+".png")
+		self.characterpic = os.path.join(self.imgdir,self.character+".png")
 		self.dreamballoon = os.path.join(self.imgdir,"dream.png")
 		self.dreambase = os.path.join(self.imgdir,"dreambase.png")
+		self.bigbase = os.path.join(self.imgdir,"bigbase.png")
 		self.minidream = os.path.join(self.imgdir,"minidream.png")
 		self.empty = os.path.join(self.imgdir,"empty.png")
 		self.balloonbase = os.path.join(self.imgdir,"balloonbase.png")
@@ -123,6 +125,11 @@ class Puppet():
 		out = Image.alpha_composite(base, overlay)
 		out.save(self.balloonbase)
 		return self.balloonbase
+
+	def draw_base(self):
+		posx = 80
+		posy = 200
+		myimage = combine_sources(posx,posy,self.bigbase,self.characterpic,self.imagefile)
 	
 	def build_popup(self):
 
@@ -130,8 +137,8 @@ class Puppet():
 		self.baloon=self.draw_balloons(balloontype=self.verb)
 
 		if self.verb == 'say':
-			self.origx = 200; self.origy = 50
-			self.textX = 280; self.textY = 95
+			self.origx = 230; self.origy = 50
+			self.textX = 310; self.textY = 95
 		elif self.verb == 'think':
 			self.origx = 220; self.origy = 10
 			self.textX = 300; self.textY = 55
@@ -145,9 +152,10 @@ class Puppet():
 			self.origx = 190; self.origy = 10
 			self.textX = 260; self.textY = 55
 
-		# combine images together
+		# combine images together - Main 
 		self.combo = "images/output.png"
 		self.draw_balloons(balloontype=self.verb)
+		self.draw_base()
                 myimage = combine_sources(self.origx,self.origy,self.imagefile,self.baloon,self.combo)
 	
                 # draw text
