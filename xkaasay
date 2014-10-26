@@ -19,6 +19,6 @@ parser.add_option('-d', action="store", default="images/sheep.png", help="path t
 
 options, args = parser.parse_args()
 
-xkaa.Puppet(character='snake',verb=options.a,text=options.t,dreamed=options.d,font="BonvenoCF-Light.otf",fontcolor=(255,0,0))
+xkaa.Puppet(character='bull',verb=options.a,text=options.t,dreamed=options.d,font="BonvenoCF-Light.otf",fontcolor=(0,0,0))
 gtk.main()
 

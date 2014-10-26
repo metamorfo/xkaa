@@ -3,13 +3,15 @@
 a snake with different balloon styles. He will display custom text,
 or pictures (if in dream mode). Here's a sample on how to run it:
 
-Puppet(verb=action,text=yourtext)
+characters are the pics in images
+
+Puppet(character='snake',verb=say,text="your Text",font="BonvenoCF-Light.otf",fontcolor=(255,0,0))
 
 where action can be 'say','think' or 'shout'
 
 or if dreaming :
 
-Puppet(verb="dream",picture=path_to_your_pic) '''
+Puppet(character='donkey',verb="dream",picture=path_to_your_pic) '''
 
 import gtk,sys,os
 import cairo
@@ -180,8 +182,11 @@ class Puppet():
 	def close_application(self,widget,event,data=None):
 		gtk.main_quit()
 		os.unlink(self.combo)
+		os.unlink(self.imagefile)
+		os.unlink(self.balloonbase)
 		try:
 			os.unlink(self.minidream)
+			os.unlink(self.dreamballoon)
 		except:
 			pass
 
