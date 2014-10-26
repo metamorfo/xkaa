@@ -19,6 +19,9 @@ from PIL import ImageDraw
 from PIL import Image
 import textwrap
 
+imgdir = "images"
+fontdir = "fonts"
+
 
 def combine_sources(posx,posy,img1,img2,final):
 	output = final
@@ -33,23 +36,24 @@ def combine_sources(posx,posy,img1,img2,final):
 
 class Puppet():
 		
-	def __init__(self,verb=None,text=None,dreamed=None):
+	def __init__(self,character=None,verb=None,text=None,dreamed=None,font=None,fontcolor=(0,0,0)):
 		
 		self.imgW = 640
 		self.imgH = 520
-		self.imagefile = "images/absnake.png"
-		self.sayballoon = "images/say.png"
-		self.dreamballoon = "images/dream.png"
-		self.thinkballoon = "images/dream.png"
-		self.shoutballoon = "images/shout.png"
-		self.dreambase = "images/dreambase.png"
-		self.minidream = "images/minidream.png"
-		self.empty = "images/empty.png"
-		self.balloonbase = "images/balloonbase.png"
-		self.fontfile = "fonts/BonvenoCF-Light.otf"
+		self.character = character
+		self.font = font
+		self.imgdir = imgdir
+		self.imagefile = os.path.join(self.imgdir,self.character+".png")
+		self.dreamballoon = os.path.join(self.imgdir,"dream.png")
+		self.dreambase = os.path.join(self.imgdir,"dreambase.png")
+		self.minidream = os.path.join(self.imgdir,"minidream.png")
+		self.empty = os.path.join(self.imgdir,"empty.png")
+		self.balloonbase = os.path.join(self.imgdir,"balloonbase.png")
+		self.fontdir = fontdir
+		self.fontfile = os.path.join(self.fontdir,self.font)
 		self.title = "xKaa"
 		self.dreamed = dreamed
-		self.fontcolor = (0,0,0)
+		self.fontcolor = fontcolor
 
 		self.verb = verb
                 self.text = text
