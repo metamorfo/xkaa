@@ -138,8 +138,8 @@ class Puppet():
 			draw.polygon([(30, 220),(94,190),(66,166)],fill = 'white')
 		elif ( self.balloontype=='dream')  or ( self.balloontype=='think'):
 			# small bubble
-                        draw.ellipse((4, 198,44,236), fill = 'black' )
-                        draw.ellipse((10, 204,38,230), fill = 'white' )
+                        draw.ellipse((2, 198,44,236), fill = 'black' )
+                        draw.ellipse((8, 204,38,230), fill = 'white' )
 			# medium bubble
 			draw.ellipse((18, 164, 116, 236), fill = 'black')
 			draw.ellipse((24, 170,110,230), fill = 'white' )
@@ -159,7 +159,8 @@ class Puppet():
 					(147,42),(191,19),(201,57),(252,47),(249,88),
 					(282,120),(235,137),(260,172),(210,178),
 					(233,218),(170,174),(148,211),(130,185),
-					(104,240),(94,200),(47,229),(29,200)],fill = 'white',outline='black')
+					(104,240),(94,200),(47,229),(29,200)],fill = 'black')
+
 		else:
 			draw.ellipse((20, 20, 280, 220), fill = 'white')
 		out = Image.alpha_composite(base, overlay)
@@ -169,7 +170,11 @@ class Puppet():
 	def draw_base(self):
 		posx = 80
 		posy = 200
-		myimage = combine_sources(posx,posy,self.bigbase,self.characterpic,self.imagefile)
+		if os.path.exists(self.characterpic):
+			myimage = combine_sources(posx,posy,self.bigbase,self.characterpic,self.imagefile)
+		else:
+			print "No such character"
+			sys.exit()
 	
 	def build_popup(self):
 
@@ -187,7 +192,9 @@ class Puppet():
 			self.origx = 220; self.origy = 0
 		elif self.verb == 'shout':
 			self.origx = 210; self.origy = 10
-			self.textX = 270; self.textY = 70
+			self.textX = 270; self.textY = 80
+			self.fontcolor = (255,255,255)
+			self.text = self.text.upper()
 		else:
 			self.origx = 190; self.origy = 10
 			self.textX = 260; self.textY = 55
@@ -202,15 +209,19 @@ class Puppet():
                 img = Image.open(self.combo)
                 draw = ImageDraw.Draw(img)
                 font = ImageFont.truetype(self.fontfile, 15)
+		limit = 20
 
 		if self.baloon != self.dreamballoon:
                 	# handling the wrap around of text is done via textwrap module
-			lines = textwrap.wrap(self.text, width = 20)
+			lines = textwrap.wrap(self.text, width = limit)
 			y_text = self.textY
 			x_text = self.textX
 			for line in lines:
 				width, height = font.getsize(line)
-				draw.text((x_text, y_text), line, self.fontcolor, font=font)
+				if self.verb != "shout":
+					draw.text((x_text, y_text), line, self.fontcolor, font=font)
+				else:
+					draw.text((x_text, y_text), line.center(limit), self.fontcolor, font=font)
 				y_text += height
 
                 # save image
