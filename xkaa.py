@@ -136,6 +136,11 @@ class Puppet():
 			draw.ellipse((24, 4, 294, 210), fill = 'black')
 			draw.ellipse((30, 10, 288, 204), fill = 'white')
 			draw.polygon([(30, 220),(94,190),(66,166)],fill = 'white')
+		elif self.balloontype=='sandman':
+			draw.polygon([(20, 230),(94,196),(56,168)],fill = 'white',outline='white')
+			draw.ellipse((24, 4, 294, 210), fill = 'white')
+			draw.ellipse((30, 10, 288, 204), fill = 'black')
+			draw.polygon([(30, 220),(94,190),(66,166)],fill = 'black')
 		elif ( self.balloontype=='dream')  or ( self.balloontype=='think'):
 			# small bubble
                         draw.ellipse((2, 198,44,236), fill = 'black' )
@@ -184,6 +189,10 @@ class Puppet():
 		if self.verb == 'say':
 			self.origx = 230; self.origy = 10
 			self.textX = 290; self.textY = 65
+		elif self.verb == 'sandman':
+			self.origx = 230; self.origy = 10
+			self.textX = 290; self.textY = 65
+			self.fontcolor = (255,255,255)
 		elif self.verb == 'think':
 			self.origx = 230; self.origy = 10
 			self.textX = 290; self.textY = 65
