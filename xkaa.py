@@ -112,8 +112,8 @@ class Puppet():
 					(8,70),(51,62),(25,22),(85,38),(120,9),
 					(147,42),(191,19),(201,57),(252,47),(249,88),
 					(282,120),(235,137),(260,172),(210,178),
-					(233,218),(170,174),(148,211),(130,162),
-					(104,194),(94,148),(47,229),(29,200)],fill = 'white',outline='black')
+					(233,218),(170,174),(148,211),(130,185),
+					(104,240),(94,200),(47,229),(29,200)],fill = 'white',outline='black')
 		else:
 			draw.ellipse((20, 20, 280, 220), fill = 'white')
 		out = Image.alpha_composite(base, overlay)
@@ -127,16 +127,16 @@ class Puppet():
 
 		if self.verb == 'say':
 			self.origx = 200; self.origy = 50
-			self.textX = 270; self.textY = 95
+			self.textX = 280; self.textY = 95
 		elif self.verb == 'think':
 			self.origx = 220; self.origy = 10
-			self.textX = 290; self.textY = 55
+			self.textX = 300; self.textY = 55
 		elif self.verb == 'dream':
 			self.baloon=self.make_dream()
 			self.origx = 220; self.origy = 0
 		elif self.verb == 'shout':
 			self.origx = 210; self.origy = 10
-			self.textX = 270; self.textY = 65
+			self.textX = 280; self.textY = 65
 		else:
 			self.origx = 190; self.origy = 10
 			self.textX = 260; self.textY = 55
