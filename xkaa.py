@@ -164,17 +164,17 @@ class Puppet():
 		self.baloon=self.draw_balloons(balloontype=self.verb)
 
 		if self.verb == 'say':
-			self.origx = 230; self.origy = 50
-			self.textX = 320; self.textY = 95
+			self.origx = 230; self.origy = 10
+			self.textX = 290; self.textY = 65
 		elif self.verb == 'think':
 			self.origx = 230; self.origy = 10
-			self.textX = 320; self.textY = 55
+			self.textX = 290; self.textY = 65
 		elif self.verb == 'dream':
 			self.baloon=self.make_dream()
 			self.origx = 220; self.origy = 0
 		elif self.verb == 'shout':
 			self.origx = 210; self.origy = 10
-			self.textX = 280; self.textY = 65
+			self.textX = 270; self.textY = 70
 		else:
 			self.origx = 190; self.origy = 10
 			self.textX = 260; self.textY = 55
