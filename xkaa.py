@@ -7,7 +7,7 @@
 				(E. Lear)
 
 
-	A python rework of xcowsay, this python script will display
+	A python rework of xcowsay ( http://www.doof.me.uk/xcowsay ) , this python script will display
 	a character with different balloon styles. He will display custom text,
 	or pictures (if in dream mode). Here's a sample on how to run it:
 
@@ -19,7 +19,7 @@
 
 	verb can be : say, think, shout or dream
 
-	if dream, you can pass an image as the dream :
+	if dream, you can pass an image as the dream topic :
 
 	Puppet(character='donkey',verb="dream",dreamed=path_to_your_pic) '''
 
