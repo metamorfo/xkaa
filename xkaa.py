@@ -114,12 +114,13 @@ class Puppet():
 
 	def make_dream(self):
 		# combine images together
-		posx = 80
-		posy = 65
+		scalefactor = 1
+		posx = 80 
+		posy = 65 
 		width = 128
 		im = gtk.Image()
 		pixbuf = gtk.gdk.pixbuf_new_from_file(self.dreamed)
-		scaled_buf = pixbuf.scale_simple(width,(width*3)/4,gtk.gdk.INTERP_BILINEAR)
+		scaled_buf = pixbuf.scale_simple(width/scalefactor,width/scalefactor,gtk.gdk.INTERP_BILINEAR)
 		scaled_buf.save(self.minidream,'png')
 		myimage = combine_sources(posx,posy,self.balloonbase,self.minidream,self.dreamballoon)
 		return self.dreamballoon
