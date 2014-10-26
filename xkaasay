@@ -24,7 +24,7 @@ parser = OptionParser()
 import optparse
 
 parser = optparse.OptionParser()
-parser.add_option('-t', action="store", default="Hello World! Use -h for help")
+parser.add_option('-t', action="store", default="Hello World! Use -h for help", help="Your text")
 parser.add_option('-a', action="store", default="say", help="action can be: say, shout, think or dream")
 parser.add_option('-d', action="store", default="images/sheep.png", help="path to dream image")
 parser.add_option('-c', action="store", default="snake", help="character name")
